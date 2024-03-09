@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
         forwardMovementInput = Input.GetAxis("Vertical");
         rightMovementInput = Input.GetAxis("Horizontal");
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && onGround)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
