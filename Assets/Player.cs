@@ -12,11 +12,13 @@ public class Player : MonoBehaviour
     float rightMovementInput;
     bool onGround = false;
 
+    Transform cam;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        cam = Camera.main.transform;
     }
 
     // Update is called once per frame
@@ -40,7 +42,21 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 movementVector = ((transform.forward * forwardMovementInput) + (transform.right * rightMovementInput)).normalized * speed;
+
+        Vector3 camForward = cam.forward;
+        Vector3 camRight = cam.right;
+
+        camForward.y = 0;
+        camForward.Normalize();
+
+        camRight.y = 0;
+        camRight.Normalize();
+
+        Vector3 forwardRelative = forwardMovementInput * camForward;
+        Vector3 rightRelative = rightMovementInput * camRight;
+
+        Vector3 movementVector = (forwardRelative + rightRelative).normalized * speed;
+
         movementVector.y = rb.velocity.y;
 
         rb.velocity = movementVector;
