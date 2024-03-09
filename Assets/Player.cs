@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
     [SerializeField] float speed = 1;
     [SerializeField] float jumpForce = 10;
     [SerializeField] float groundCheckDistance = 1;
+    [SerializeField] LayerMask environmentOnly;
 
     Rigidbody rb;
     float forwardMovementInput;
@@ -21,7 +22,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        onGround = Physics.Raycast(transform.position, Vector3.up * -1, groundCheckDistance);
+        onGround = Physics.Raycast(transform.position, Vector3.up * -1, groundCheckDistance, environmentOnly);
 
         forwardMovementInput = Input.GetAxis("Vertical");
         rightMovementInput = Input.GetAxis("Horizontal");
