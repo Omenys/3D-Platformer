@@ -3,6 +3,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] float speed = 1.0f;
+    [SerializeField] float jumpForce = 1.0f;
+
     float forwardMovementInput;
     float rightMovementInput;
     Rigidbody rb;
@@ -18,6 +20,11 @@ public class Player : MonoBehaviour
     {
         forwardMovementInput = Input.GetAxis("Vertical");
         rightMovementInput = Input.GetAxis("Horizontal");
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
 
     }
 
