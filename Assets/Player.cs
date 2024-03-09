@@ -2,12 +2,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] float speed = 1.0f;
-    [SerializeField] float jumpForce = 1.0f;
+    [SerializeField] float speed = 1;
+    [SerializeField] float jumpForce = 10;
+    [SerializeField] float groundCheckDistance = 1;
 
+    Rigidbody rb;
     float forwardMovementInput;
     float rightMovementInput;
-    Rigidbody rb;
+    bool onGround = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +21,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        onGround = Physics.Raycast(transform.position, Vector3.up * -1, groundCheckDistance);
+
         forwardMovementInput = Input.GetAxis("Vertical");
         rightMovementInput = Input.GetAxis("Horizontal");
 
@@ -25,6 +30,10 @@ public class Player : MonoBehaviour
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
+
+        Debug.DrawLine(transform.position,
+            transform.position + (transform.up * -groundCheckDistance),
+            Color.red);
 
     }
 
