@@ -1,0 +1,7 @@
+SS_CardBoardGuy-01:
+- IDLE: Total of 42 Frames
+- JUMP: Total of 21 Frames
+
+SS_CardBoardGuy-01:
+- RUN: Total of 24 Frames
+- WALK: Total of 28 Frames

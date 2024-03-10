@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     float rightMovementInput;
     bool onGround = false;
 
+
     Transform cam;
 
     // Start is called before the first frame update
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         cam = Camera.main.transform;
+
     }
 
     // Update is called once per frame
@@ -34,10 +36,9 @@ public class Player : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
-        Debug.DrawLine(transform.position,
-            transform.position + (transform.up * -groundCheckDistance),
+        Debug.DrawLine(transform.position, // start position
+            transform.position + (transform.up * -groundCheckDistance), // end position
             Color.red);
-
     }
 
     private void FixedUpdate()
@@ -61,4 +62,5 @@ public class Player : MonoBehaviour
 
         rb.velocity = movementVector;
     }
+
 }
