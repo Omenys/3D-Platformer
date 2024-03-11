@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
         Vector3 forwardRelative = forwardMovementInput * camForward;
         Vector3 rightRelative = rightMovementInput * camRight;
 
-        Vector3 movementVector = (forwardRelative + rightRelative).normalized * speed;
+        Vector3 movementVector = (forwardRelative + rightRelative) * speed;
 
         movementVector.y = rb.velocity.y;
 
