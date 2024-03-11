@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
     [SerializeField] float jumpForce = 10;
     [SerializeField] float groundCheckDistance = 1;
     [SerializeField] LayerMask environmentOnly;
+    [SerializeField] Animator anim;
 
     Rigidbody rb;
     float forwardMovementInput;
@@ -61,6 +62,8 @@ public class Player : MonoBehaviour
         movementVector.y = rb.velocity.y;
 
         rb.velocity = movementVector;
+
+        anim.SetFloat("speed", movementVector.magnitude);
     }
 
 }
