@@ -45,10 +45,6 @@ public class Player : MonoBehaviour
         Debug.DrawLine(transform.position, // start position
             transform.position + (transform.up * -groundCheckDistance), // end position
             Color.red);
-
-        //var movementVector = new Vector3(forwardMovementInput, 0, rightMovementInput);
-        //anim.SetFloat("speed", movementVector.magnitude);
-        //anim.transform.forward = movementVector;
     }
 
     private void FixedUpdate()
