@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
 
         var movementVector = new Vector3(forwardMovementInput, 0, rightMovementInput);
         anim.SetFloat("speed", movementVector.magnitude);
-        anim.transform.forward = movementVector;
+        //anim.transform.forward = movementVector;
 
         if (Input.GetButtonDown("Jump") && onGround)
         {
@@ -62,12 +62,11 @@ public class Player : MonoBehaviour
         Vector3 forwardRelative = forwardMovementInput * camForward;
         Vector3 rightRelative = rightMovementInput * camRight;
 
-        Vector3 movementVector = (forwardRelative + rightRelative) * speed;
+        Vector3 movementVector = (forwardRelative + rightRelative).normalized * speed;
+        anim.transform.forward = movementVector;
 
         movementVector.y = rb.velocity.y;
         rb.velocity = movementVector;
-
-
 
     }
 
