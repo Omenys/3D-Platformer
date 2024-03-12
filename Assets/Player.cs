@@ -32,14 +32,23 @@ public class Player : MonoBehaviour
         forwardMovementInput = Input.GetAxis("Vertical");
         rightMovementInput = Input.GetAxis("Horizontal");
 
+        var movementVector = new Vector3(forwardMovementInput, 0, rightMovementInput);
+        anim.SetFloat("speed", movementVector.magnitude);
+        anim.transform.forward = movementVector;
+
         if (Input.GetButtonDown("Jump") && onGround)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            anim.SetTrigger("jump");
         }
 
         Debug.DrawLine(transform.position, // start position
             transform.position + (transform.up * -groundCheckDistance), // end position
             Color.red);
+
+        //var movementVector = new Vector3(forwardMovementInput, 0, rightMovementInput);
+        //anim.SetFloat("speed", movementVector.magnitude);
+        //anim.transform.forward = movementVector;
     }
 
     private void FixedUpdate()
@@ -60,10 +69,10 @@ public class Player : MonoBehaviour
         Vector3 movementVector = (forwardRelative + rightRelative) * speed;
 
         movementVector.y = rb.velocity.y;
-
         rb.velocity = movementVector;
 
-        anim.SetFloat("speed", movementVector.magnitude);
+
+
     }
 
 }
