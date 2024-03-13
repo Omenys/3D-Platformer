@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] float speed = 1;
+    [SerializeField] float speed = 2;
     [SerializeField] float jumpForce = 10;
     [SerializeField] float groundCheckDistance = 1;
     [SerializeField] LayerMask environmentOnly;
@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
         Vector3 forwardRelative = forwardMovementInput * camForward;
         Vector3 rightRelative = rightMovementInput * camRight;
 
-        Vector3 movementVector = (forwardRelative + rightRelative).normalized * speed;
+        Vector3 movementVector = (forwardRelative + rightRelative) * speed;
         anim.transform.forward = movementVector;
 
         movementVector.y = rb.velocity.y;
