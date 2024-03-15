@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -14,7 +15,7 @@ public class Player : MonoBehaviour
     float forwardMovementInput;
     float rightMovementInput;
     bool onGround = false;
-
+    TMP_Text scoreText;
 
     Transform cam;
 
@@ -23,6 +24,8 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         cam = Camera.main.transform;
+
+        scoreText = FindObjectOfType<TMP_Text>();
 
     }
 
@@ -72,4 +75,11 @@ public class Player : MonoBehaviour
 
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            stats.currentScore++;
+        }
+    }
 }
