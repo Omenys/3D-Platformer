@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     [SerializeField] float groundCheckDistance = 1;
     [SerializeField] LayerMask environmentOnly;
     [SerializeField] Animator anim;
+    [SerializeField] int SceneGoTo = 0;
+    [SerializeField] PlayerStats stats;
 
     Rigidbody rb;
     float forwardMovementInput;
