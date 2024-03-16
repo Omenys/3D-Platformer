@@ -1,5 +1,5 @@
-
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] float groundCheckDistance = 1;
     [SerializeField] LayerMask environmentOnly;
     [SerializeField] Animator anim;
-    [SerializeField] int SceneGoTo = 0;
+    //[SerializeField] int SceneGoTo = 0;
     [SerializeField] PlayerStats stats;
 
     Rigidbody rb;
@@ -85,26 +85,45 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Coin"))
         {
+            // Collect coin and update score by 1
             Destroy(other.gameObject);
             stats.currentScore++;
+
+            // If score limit reached load win screen
             if (stats.currentScore == stats.maxScore)
             {
                 // Win
+                SceneManager.LoadScene("Victory");
             }
+
+
         }
 
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Bounds"))
+        {
+            // If out of bounds, end game
+            SceneManager.LoadScene("GameOver");
+        }
     }
 
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            // Remove 1 health
             stats.currentHealth--;
 
-            if (stats.currentHealth < 0)
+            // If health is 0 load game over screen
+            if (stats.currentHealth <= 0)
             {
                 // Game Over
+                SceneManager.LoadScene("GameOver");
             }
+
         }
     }
 
