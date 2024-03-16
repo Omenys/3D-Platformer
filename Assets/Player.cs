@@ -23,28 +23,33 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         cam = Camera.main.transform;
-
+        stats.defaultStats();
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Raycasting ground check
         onGround = Physics.Raycast(transform.position, Vector3.up * -1, groundCheckDistance, environmentOnly);
 
+        // Input
         forwardMovementInput = Input.GetAxis("Vertical");
         rightMovementInput = Input.GetAxis("Horizontal");
 
+        // Update vectors for movement
         var movementVector = new Vector3(forwardMovementInput, 0, rightMovementInput);
         anim.SetFloat("speed", movementVector.magnitude);
-        //anim.transform.forward = movementVector;
 
+
+        // Character jump logic
         if (Input.GetButtonDown("Jump") && onGround)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             anim.SetTrigger("jump");
         }
 
+        // Raycasting visual representation
         Debug.DrawLine(transform.position, // start position
             transform.position + (transform.up * -groundCheckDistance), // end position
             Color.red);
@@ -52,7 +57,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-
+        // Camera logic for following character
         Vector3 camForward = cam.forward;
         Vector3 camRight = cam.right;
 
@@ -73,7 +78,7 @@ public class Player : MonoBehaviour
 
     }
 
-    // Update score if collision with coin object
+    // Update stats if collision with objects
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Coin"))
@@ -82,5 +87,14 @@ public class Player : MonoBehaviour
             stats.currentScore++;
         }
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            stats.currentHealth--;
+        }
+    }
+
 
 }

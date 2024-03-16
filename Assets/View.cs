@@ -18,6 +18,7 @@ public class View : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Update UI based on stats
         bar.fillAmount = stats.currentHealth / stats.maxHealth;
         scoreText.text = stats.currentScore.ToString();
     }
