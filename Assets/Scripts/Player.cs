@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         cam = Camera.main.transform;
+
+        // Reset stats on start
         stats.defaultStats();
 
     }
@@ -85,7 +87,12 @@ public class Player : MonoBehaviour
         {
             Destroy(other.gameObject);
             stats.currentScore++;
+            if (stats.currentScore == stats.maxScore)
+            {
+                // Win
+            }
         }
+
     }
 
     void OnCollisionEnter(Collision collision)
@@ -93,6 +100,11 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             stats.currentHealth--;
+
+            if (stats.currentHealth < 0)
+            {
+                // Game Over
+            }
         }
     }
 
