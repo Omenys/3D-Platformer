@@ -33,4 +33,9 @@ public class View : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("Title");
+    }
 }
