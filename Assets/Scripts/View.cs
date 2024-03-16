@@ -38,4 +38,9 @@ public class View : MonoBehaviour
     {
         SceneManager.LoadScene("Title");
     }
+
+    public void ReloadLevel()
+    {
+        SceneManager.LoadScene("Gameplay");
+    }
 }
